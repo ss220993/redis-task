@@ -8,13 +8,13 @@ from model import *
 import json
 
 app = Flask(__name__)
-app.debug = True
+app.debug = False
 
-url = os.getenv('REDIS_URL')
+url = os.getenv('redis')
 if url:
     db = redis.Redis.from_url(url)
 else:
-    db = redis.Redis('localhost')
+    db = redis.Redis(host='redis', port='6379')
 
 
 @app.errorhandler(400)
@@ -68,5 +68,4 @@ def brandsCount():
 
 if __name__ == "__main__":
     app.config['JSON_SORT_KEYS'] = False
-    app.run(debug=True, use_reloader=False)
-
+    app.run(debug=False, host='0.0.0.0')

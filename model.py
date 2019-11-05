@@ -1,6 +1,6 @@
 import redis
 
-db = redis.Redis('localhost')
+db = redis.Redis(host='redis', port='6379')
 recent_key = 'event:Recent:'
 brands_count_key = 'event:Brand:'
 

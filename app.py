@@ -6,6 +6,7 @@ from flask import jsonify
 from helper import *
 from model import *
 import json
+from ast import literal_eval
 
 app = Flask(__name__)
 app.debug = False
@@ -51,7 +52,6 @@ def recentItem():
 
     return resultfromDb, 200
 
-
 @app.route('/getBrandsCount/', methods=['GET'])
 def brandsCount():
     dateGiven = request.args.get('date')
@@ -65,6 +65,21 @@ def brandsCount():
     sortedInput = sortByCount(json.loads(resultfromDb))
     return sortedInput, 200
 
+def recentTenColors():
+    colorGiven = request.args.get('color')
+    if not colorGiven:
+        return bad_request()
+    resultfromDb = get_recent_ten_colors(colorGiven)
+
+    if len(resultfromDb) == 0:
+        return not_found()
+    data = []
+    for result in resultfromDb:
+      values = literal_eval(result.decode('utf8'))
+      del values["colors"]
+      values["color"] = colorGiven
+      data.append(values)
+    return json.dumps(data, indent=4), 200
 
 if __name__ == "__main__":
     app.config['JSON_SORT_KEYS'] = False

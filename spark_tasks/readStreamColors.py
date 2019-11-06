@@ -7,7 +7,7 @@ import dateutil.parser
 findspark.init()
 
 kafkaHost = "localhost"
-kafkaPort = "9093"
+kafkaPort = "9094"
 kafkaTopic = "colors"
 
 def processColors(db, inputRow):

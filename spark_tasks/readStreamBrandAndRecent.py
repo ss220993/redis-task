@@ -8,7 +8,7 @@ findspark.init()
 
 kafkaHost = "localhost"
 kafkaPort = "9093"
-kafkaTopic = "timestamp1"
+kafkaTopic = "timestamp"
 
 
 def processRecentItem(db, inputRow):

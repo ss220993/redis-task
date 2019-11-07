@@ -61,21 +61,20 @@ def brandsCount():
 
 @app.route('/getItemsbyColor/', methods=['GET'])
 def recentTenColors():
-    return "hi", 200
     colorGiven = request.args.get('color')
     if not colorGiven:
         return bad_request()
     resultfromDb = get_recent_ten_colors(colorGiven)
 
     if len(resultfromDb) == 0:
-        return "hi", 200
+        return not_found()
     data = []
     for result in resultfromDb:
       values = literal_eval(result.decode('utf8'))
       del values["colors"]
       values["color"] = colorGiven
       data.append(values)
-    return "hi", 200
+    return json.dumps(data, indent=4), 200
 
 if __name__ == "__main__":
     app.config['JSON_SORT_KEYS'] = False

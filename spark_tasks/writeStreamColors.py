@@ -6,7 +6,7 @@ findspark.init()
 kafkaHost = "localhost"
 kafkaPort = "9093"
 kafkaTopic = "colors"
-inputPath = '/Users/subhashree/Downloads/womens-shoes-prices-new3'
+inputPath = 'womens-shoes-prices-1'
 
 def startStreaming():
   try:
@@ -30,10 +30,8 @@ def startStreaming():
                         StructField("primaryCategories", StringType(), True),
                         StructField("colors", StringType(), True)])
       df = spark.readStream.schema(schema).option("sep", ",").option("header", "true").option("enforceSchema", "true").csv(inputPath)
-      print("*********")
       read = df.select((df.dateAdded).alias('key'),to_json(struct([df[x] for x in columns])).alias("value")).writeStream.format("kafka").option("kafka.bootstrap.servers", kafkaHost+":"+kafkaPort).option("topic",kafkaTopic).option("checkpointLocation", "checkpoint").start()
-      read.awaitTermination()
-      print ("Successfully Streamed")
+      read.awaitTermination(2000)
   except ImportError as e:
       print ("Can not import Spark Modules", e)
       sys.exit(1)

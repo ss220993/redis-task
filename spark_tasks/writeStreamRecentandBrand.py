@@ -1,12 +1,11 @@
-import os
 import sys
 import findspark
 findspark.init()
 
 kafkaHost = "localhost"
-kafkaPort = "9093"
-kafkaTopic = "timestamp1"
-inputPath = '/Users/subhashree/Downloads/womens-shoes-prices-new2'
+kafkaPort = "9094"
+kafkaTopic = "timestamp"
+inputPath = 'womens-shoes-prices-2'
 
 def startStreaming():
   try:

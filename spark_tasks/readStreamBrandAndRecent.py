@@ -7,26 +7,27 @@ import dateutil.parser
 findspark.init()
 
 kafkaHost = "localhost"
-kafkaPort = "9093"
+kafkaPort = "9094"
 kafkaTopic = "timestamp"
 
 
 def processRecentItem(db, inputRow):
     inputRowKey = inputRow.key
-    inputRowValue = json.loads(inputRow.value)
-    keyMap = "event:Recent" + inputRowKey
-    if db.exists(keyMap):
-        parsedPreviousHashValue = json.loads(db.get(keyMap))
-        if 'dateAdded' in parsedPreviousHashValue:
-            previousDateAdded = dateutil.parser.parse(parsedPreviousHashValue['dateAdded'])
-            if 'dateAdded' in inputRowValue:
-                inputRowDateAdded = dateutil.parser.parse(inputRowValue['dateAdded'])
-                if (inputRowDateAdded > previousDateAdded):
-                    with db.lock('my_lock-2'):
-                        db.set(keyMap, inputRow.value)
-    else:
-        with db.lock('my_lock-2'):
-            db.set(keyMap, inputRow.value)
+    if inputRowKey:
+        inputRowValue = json.loads(inputRow.value)
+        keyMap = "event:Recent:" + inputRowKey
+        if db.exists(keyMap):
+            parsedPreviousHashValue = json.loads(db.get(keyMap))
+            if 'dateAdded' in parsedPreviousHashValue:
+                previousDateAdded = dateutil.parser.parse(parsedPreviousHashValue['dateAdded'])
+                if 'dateAdded' in inputRowValue:
+                    inputRowDateAdded = dateutil.parser.parse(inputRowValue['dateAdded'])
+                    if (inputRowDateAdded > previousDateAdded):
+                        with db.lock('my_lock-2'):
+                            db.set(keyMap, inputRow.value)
+        else:
+            with db.lock('my_lock-2'):
+                db.set(keyMap, inputRow.value)
 
 
 def processBrandCount(db, inputRow):

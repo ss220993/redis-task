@@ -9,13 +9,7 @@ import json
 from ast import literal_eval
 
 app = Flask(__name__)
-app.debug = False
-
-url = os.getenv('redis')
-if url:
-    db = redis.Redis.from_url(url)
-else:
-    db = redis.Redis(host='redis', port='6379')
+app.debug = True
 
 
 @app.errorhandler(400)
@@ -65,22 +59,24 @@ def brandsCount():
     sortedInput = sortByCount(json.loads(resultfromDb))
     return sortedInput, 200
 
+@app.route('/getItemsbyColor/', methods=['GET'])
 def recentTenColors():
+    return "hi", 200
     colorGiven = request.args.get('color')
     if not colorGiven:
         return bad_request()
     resultfromDb = get_recent_ten_colors(colorGiven)
 
     if len(resultfromDb) == 0:
-        return not_found()
+        return "hi", 200
     data = []
     for result in resultfromDb:
       values = literal_eval(result.decode('utf8'))
       del values["colors"]
       values["color"] = colorGiven
       data.append(values)
-    return json.dumps(data, indent=4), 200
+    return "hi", 200
 
 if __name__ == "__main__":
     app.config['JSON_SORT_KEYS'] = False
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')

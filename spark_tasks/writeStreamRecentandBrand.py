@@ -5,7 +5,7 @@ findspark.init()
 kafkaHost = "localhost"
 kafkaPort = "9094"
 kafkaTopic = "timestamp"
-inputPath = 'womens-shoes-prices-2'
+inputPath = 'redis-task/womens-shoes-prices-2'
 
 def startStreaming():
   try:
@@ -29,7 +29,6 @@ def startStreaming():
                         StructField("primaryCategories", StringType(), True),
                         StructField("colors", StringType(), True)])
       df = spark.readStream.schema(schema).option("sep", ",").option("header", "true").option("enforceSchema", "true").csv(inputPath)
-      print("*********")
       read = df.select(date_format(df.dateAdded,"yyyy-MM-dd").alias('key'),to_json(struct([df[x] for x in columns])).alias("value")).writeStream.format("kafka").option("kafka.bootstrap.servers", kafkaHost+":"+kafkaPort).option("topic",kafkaTopic).option("checkpointLocation", "checkpoint").start()
       read.awaitTermination()
       print ("Successfully Streamed")

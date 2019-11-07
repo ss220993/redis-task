@@ -6,7 +6,7 @@ findspark.init()
 kafkaHost = "localhost"
 kafkaPort = "9093"
 kafkaTopic = "colors"
-inputPath = 'womens-shoes-prices-1'
+inputPath = 'redis-task/womens-shoes-prices-1'
 
 def startStreaming():
   try:

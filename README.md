@@ -63,7 +63,7 @@ streaming.
    `bin/kafka-console-producer.sh --broker-list 127.0.0.1:9094 --topic timestamp`  
    `bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9094 --topic timestamp`
    2. Consumer and Producer in topic colors listening to port 9093  
-   `bin/kafka-console-producer.sh --broker-list 127.0.0.1:9093 --topic colors`
+   `bin/kafka-console-producer.sh --broker-list 127.0.0.1:9093 --topic colors` 
    `bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9093 --topic colors`
 4. Do spark submit for 4 processes in 4 different tabs
    1. Write stream to Kafka for processing timestamp topic (reading from csv each record stream to kafka)   

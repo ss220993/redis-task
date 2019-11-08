@@ -5,10 +5,12 @@
 Design and implement a distributed worker system to update data in Redis using Python.
 
 **Data:**
+
 For this task, dataset used is women's shoe catalog. (https://www.kaggle.com/datafiniti/womens-shoes-prices/)
 The dataset contains, "id, brand, colors, dateAdded" as headers.
 
 **Problem Statement:**
+
 There are two parts to this:
 1. Database: 
 Redis server to store each of the record.
@@ -19,7 +21,7 @@ Spark dataframes to read the csv dataset, transform it and must insert data into
 **Requirement:**
 Implement 3 APIs(Restful) to query and fetch data from redis, All requests and responses should be in JSON format.
 
-/getRecentItem - return the most recent item added on the given date
+/getRecentItem - return the most recent item added on the given date .                
 Example:
 Input:
 2017-02-03
@@ -28,7 +30,7 @@ id: AVpe__eOilAPnD_xSt-H
 brand: Fashion Focus
 color: yellow
 
-/getBrandsCount - return the count of each brands added on the given date in descending order
+/getBrandsCount - return the count of each brands added on the given date in descending order                  
 Example:
 Input:
 2017-02-03
@@ -52,8 +54,7 @@ Output:
 ............... ...
 +-----------------+-----+
 
-
-/getItemsbyColor - return the top 10 latest items given input as color
+/getItemsbyColor - return the top 10 latest items given input as color            
 Example:
 Input:
 Blue

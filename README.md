@@ -27,20 +27,20 @@ Example:
 Input:
 2017-02-03       
 
-Output:
-id: AVpe__eOilAPnD_xSt-H                  
+Output:              
+`id: AVpe__eOilAPnD_xSt-H                  
 brand: Fashion Focus             
-color: yellow                 
+color: yellow   `              
 
 /getBrandsCount - return the count of each brands added on the given date in descending order  
 
 Example: 
 
-Input:                      
+Input:                                                                    
 2017-02-03
               
-Output:
-+-----------------+-----+
+Output:                                           
+`+-----------------+-----+
 | brand|count|
 +-----------------+-----+
 |Personal Identity| 4341|
@@ -57,16 +57,16 @@ Output:
 ............... ...
 ............... ...
 ............... ...
-+-----------------+-----+
++-----------------+-----+`
 
 /getItemsbyColor - return the top 10 latest items given input as color                         
 Example:           
 
-Input:                
+Input:                                       
 Blue            
 
-Output:                      
-[{
+Output:                                                
+`[{
 id: AVpe__eOilAPnD_xSt-H
 brand: Fashion Focus
 color: yellow
@@ -75,7 +75,7 @@ date: 2016-11-11T09:50:34Z|
 ....
 ....
 ]
-
+`
 **Architecture Design**
 
 ![design](design.png)

@@ -18,22 +18,27 @@ Redis server to store each of the record.
 2. Spark:
 Spark dataframes to read the csv dataset, transform it and must insert data into redis parallely. Only the required data for the three REST APIs to function must be stored in redis.
 
-**Requirement:**
+**Requirement:**                  
 Implement 3 APIs(Restful) to query and fetch data from redis, All requests and responses should be in JSON format.
 
 /getRecentItem - return the most recent item added on the given date .                
-Example:
-Input:
-2017-02-03
-Output:
-id: AVpe__eOilAPnD_xSt-H
-brand: Fashion Focus
-color: yellow
+Example: 
 
-/getBrandsCount - return the count of each brands added on the given date in descending order                  
-Example:
 Input:
+2017-02-03       
+
+Output:
+id: AVpe__eOilAPnD_xSt-H                  
+brand: Fashion Focus             
+color: yellow                 
+
+/getBrandsCount - return the count of each brands added on the given date in descending order  
+
+Example: 
+
+Input:                      
 2017-02-03
+              
 Output:
 +-----------------+-----+
 | brand|count|
@@ -54,11 +59,13 @@ Output:
 ............... ...
 +-----------------+-----+
 
-/getItemsbyColor - return the top 10 latest items given input as color            
-Example:
-Input:
-Blue
-Output:
+/getItemsbyColor - return the top 10 latest items given input as color                         
+Example:           
+
+Input:                
+Blue            
+
+Output:                      
 [{
 id: AVpe__eOilAPnD_xSt-H
 brand: Fashion Focus
